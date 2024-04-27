@@ -68,8 +68,6 @@ public class TeamBean implements Serializable {
     }
     
     public void saveChanges() {
-        //>find if supplier has been modified  
-        // and update the modified supplier
         if (teams == null) {
             return;
         }
