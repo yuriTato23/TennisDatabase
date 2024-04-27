@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Tennis Database: Teams</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="global-growl" globalOnly="true" showDetail="true" showSummary="true" life="2000"/>
+            <h4 title="#{msgs.titleLan}"> #{msgs.titleLan} </h4> &nbsp; 
+            &nbsp;
+                <h:commandLink action="#{languages.setEnglish()}">
+                <h:graphicImage  library="images" name ="us_flag.png" width="50" height="40" alt="#{msgs.english}" style="border: #000000 solid thin"/>
+                </h:commandLink>
+                    &nbsp;
+                <h:commandLink title="#{msgs.spanish}" action="#{languages.setSpanish()}">
+                    <h:graphicImage  library="images" name="cuba_flag.png" width="50" height="40" alt="#{msgs.spanish}" style="border: #000000 solid thin"/>
+                </h:commandLink>
+                    &nbsp;
+                <h:commandLink title="#{msgs.greek}" action="#{languages.setGreek()}">
+                    <h:graphicImage name="images/greece_flag.png" width="50" height="40" alt="#{msgs.greek}" style="border: #000000 solid thin" />
+                </h:commandLink>
+                    &nbsp;
+                <h:commandLink title="#{msgs.russian}" action="#{languages.setRussian()}">
+                    <h:graphicImage name="images/russia_flag.png" width="50" height="40" alt="#{msgs.russian}" style="border: #000000 solid thin" />
+                </h:commandLink>   <br/>
+            <p:dataTable id="teamsTable"
+                         value="#{teamBean.getTeams()}"
+                         var="team"
+                         scrollable="true"
+                         paginator="true"
+                         paginatorAlwaysVisible="true"
+                         paginatorPosition="top"
+                         rows="5"
+                         lazy="true">
+                <f:facet name="header"><h:outputText value="#{msgs.titleTeam}" style=" font-size: 1.2em"/></f:facet>
+               
+                 <p:column>
+                    <f:facet name="header"><h:outputText value="#{msgs.team_no}"/></f:facet>
+                    <p:inputText title="#{msgs.team_no}" disabled="#{!team.modify}" id="teamNo" value="#{team.team_no}"/>
+                </p:column>
+                
+                <p:column >
+                    <f:facet name="header"><h:outputText value="#{msgs.player_no}"/></f:facet>
+                    <p:inputText title="#{msgs.player_no}" disabled="#{!team.modify}" id="pNo" value="#{team.player_no}"/>
+                </p:column>
+                
+                <p:column>
+                    <f:facet name="header"><h:outputText value="#{msgs.division}"/></f:facet>
+                    <p:inputText title="#{msgs.division}" disabled="#{!team.modify}" id="division" value="#{team.division}"/>
+                </p:column>
+                
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.update}" /></f:facet>                
+                    <h:selectBooleanCheckbox title="#{msgs.update}" onclick="submit()" value="#{team.modify}">
+                    </h:selectBooleanCheckbox >
+                </p:column> 
+        </p:dataTable>
+            <h:commandButton title="#{msgs.newButton}" value="#{msgs.newButton}" action="#{teamBean.create}" style="width: auto; height:auto"/>&nbsp;
+            <h:commandButton title="#{msgs.save}" value="#{msgs.save}" action="#{teamBean.saveChanges}" style="width: auto; height:auto"/>&nbsp;
+            &nbsp;
+                  
+        <p:commandButton  title="#{msgs.delTeam}"
+                                      value="#{msgs.delTeam}" styleClass="ui-button-raised ui-button-danger" 
+                                      icon="pi pi-trash" 
+                                      onclick="PF('asdv-dlg-delete').show();"
+                                      >
+
+                    </p:commandButton  >
+                    <p:dialog header="#{msgs.delTeam}" 
+                              widgetVar="asdv-dlg-delete" modal="true">
+                        <h:outputText value="#{msgs.you_sureTeam}"/>
+                        <br/>
+                        <br/>
+                        <p:commandButton value="OK" icon="pi pi-check" 
+                                         update="@form:global-growl"
+                                         onclick="PF('dlg').hide();" 
+                                         action="#{teamBean.delete()}">
+                        </p:commandButton >
+                        <span>&nbsp;&nbsp;&nbsp;</span>
+                        <p:commandButton value="#{msgs.cancel}"  
+                                         styleClass="ui-button-raised ui-button-warning" 
+                                         update="@none"
+                                         partialSubmit = "true"
+                                         onclick="PF('dlg').hide();"/>
+                    </p:dialog>  
+                    <br/><br/>
+                    <h:commandButton title="#{msgs.titleMatch}" value="#{msgs.titleMatch}" action="matches.xhtml" style="width:auto"/>&nbsp;
+                    <h:commandButton title="#{msgs.titlePen}" value="#{msgs.titlePen}" action="penalties.xhtml" style="width:auto"/>&nbsp;
+                    <h:commandButton title="#{msgs.titleCom}" value="#{msgs.titleCom}" action="committee.xhtml" style="width:auto"/>&nbsp;
+                    <h:commandButton title="#{msgs.titleTeam}" value="#{msgs.titleTeam}" action="players.xhtml" style="width:auto"/>&nbsp;
+        </h:form>
+    </h:body>
+</html>

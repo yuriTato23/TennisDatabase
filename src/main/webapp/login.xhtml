@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Login</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="globalgrowl" life="5000" showSummary="true" showDetail="false"/>
+            <h2>Login</h2><br/>
+            
+            <p:inputMask id="user" f5:placeholder="Email" value="#{userBean.username}" 
+                         required="true" requiredMessage="Username required!">
+                <f:validator validatorId="userValidate"/>
+            </p:inputMask><br/>
+
+            <p:password id = "pw" f5:placeholder="Password" value="#{userBean.password}" 
+                         required="true" requiredMessage="Password required!">
+                <f:validator  validatorId="pwValidator"/>
+            </p:password><br/>
+            <br/>
+            <p:commandButton value="Login" action="players.xhtml" update="globalgrowl"/>
+
+        </h:form>
+    </h:body>
+</html>

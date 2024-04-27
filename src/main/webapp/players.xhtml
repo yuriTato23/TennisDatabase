@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Tennis Database: Players</title>
+        <h:outputStylesheet name="styles.css" library="css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:outputLabel>Welcome #{userBean.username}!</p:outputLabel>
+            <p:growl id="globalgrowl" globalOnly="true" showDetail="false" showSummary="true" life="2000"/>
+            <h4 title="#{msgs.titleLan}">#{msgs.titleLan} </h4> &nbsp; 
+            &nbsp;
+                <h:commandLink action="#{languages.setEnglish()}">
+                <h:graphicImage  library="images" name ="us_flag.png" width="50" height="40" alt="#{msgs.english}" style="border: #000000 solid thin"/>
+                </h:commandLink>
+                    &nbsp;
+                <h:commandLink title="#{msgs.spanish}" action="#{languages.setSpanish()}">
+                    <h:graphicImage  library="images" name="cuba_flag.png" width="50" height="40" alt="#{msgs.spanish}" style="border: #000000 solid thin"/>
+                </h:commandLink>
+                    &nbsp;
+                <h:commandLink title="#{msgs.greek}" action="#{languages.setGreek()}">
+                    <h:graphicImage name="images/greece_flag.png" width="50" height="40" alt="#{msgs.greek}" style="border: #000000 solid thin" />
+                </h:commandLink>
+                    &nbsp;
+                <h:commandLink title="#{msgs.russian}" action="#{languages.setRussian()}">
+                    <h:graphicImage name="images/russia_flag.png" width="50" height="40" alt="#{msgs.russian}" style="border: #000000 solid thin" />
+                </h:commandLink><br/>
+                    
+            <p:dataTable id="playerTable"
+                         value="#{playerBean.getPlayers()}"
+                         var="player"
+                         scrollable="true"
+                         paginator="true"
+                         paginatorAlwaysVisible="true"
+                         paginatorPosition="top"
+                         rows="5"
+                         lazy="true">
+                <f:facet name="header"><h:outputText value="#{msgs.titlePlay}" style=" font-size: 1.2em"/></f:facet>
+               
+                <p:column style="width: auto">
+                    <f:facet name="header"><h:outputText value="#{msgs.player_no}"/></f:facet>
+                    <p:inputText title="#{msgs.player_no}" disabled="#{!player.keyModify}" id="pNo" value="#{player.player_no}"/>
+                </p:column>
+                
+                <p:column style="width: auto">
+                    <f:facet name="header"><h:outputText value="#{msgs.name}"/></f:facet>
+                    <p:inputText title="#{msgs.name}" disabled="#{!player.modify}" id="pName" value="#{player.name}"/>
+                </p:column >
+                
+                <p:column style="width: auto">
+                    <f:facet name="header"><h:outputText value="#{msgs.initials}"/></f:facet>
+                    <p:inputText title="#{msgs.initials}" disabled="#{!player.modify}" id="pInitials" value="#{player.initials}"/>
+                </p:column>
+                
+                <p:column style="width: auto">
+                    <f:facet name="header"><h:outputText value="#{msgs.birth_date}"/></f:facet>
+                    <p:calendar pattern="yyyy-MM-dd" title="#{msgs.birth_date}" disabled="#{!player.modify}" id="pDOB" value="#{player.birthday_date}" converterMessage="Date is Invalid"/>
+                </p:column>
+                
+                <p:column style="width: auto">
+                    <f:facet name="header"><h:outputText value="#{msgs.sex}"/></f:facet>
+                    <p:inputText title="#{msgs.sex}" disabled="#{!player.modify}" id="pSex" value="#{player.sex}"/>
+                </p:column>
+                
+                <p:column style="width: auto">
+                    <f:facet name="header"><h:outputText value="#{msgs.joined}"/></f:facet>
+                    <p:inputText title="#{msgs.joined}" disabled="#{!player.modify}" id="pJoined" value="#{player.joined}"/>
+                </p:column>
+                
+                <p:column style="width: auto">
+                    <f:facet name="header"><h:outputText value="#{msgs.street}"/></f:facet>
+                    <p:inputText title="#{msgs.street}" disabled="#{!player.modify}" id="pStreet" value="#{player.street}"/>
+                </p:column>
+                
+                <p:column style="width: auto">
+                    <f:facet name="header"><h:outputText value="#{msgs.house_no}"/></f:facet>
+                    <p:inputText title="#{msgs.house_no}" disabled="#{!player.modify}" id="pHouseNo" value="#{player.house_no}"/>
+                </p:column>
+                
+                <p:column style="width: auto">
+                    <f:facet name="header"><h:outputText value="#{msgs.postcode}"/></f:facet>
+                    <p:inputText title="#{msgs.postcode}" disabled="#{!player.modify}" id="pPostcode" value="#{player.postcode}" />
+                </p:column>
+                
+                <p:column style="width: auto" >
+                    <f:facet name="header"><h:outputText value="#{msgs.town}"/></f:facet>
+                    <p:inputText title="#{msgs.town}" disabled="#{!player.modify}" id="pTown" value="#{player.town}"/>
+                </p:column>
+                
+                <p:column style="width: auto">
+                    <f:facet name="header"><h:outputText value="#{msgs.phone_no}"/></f:facet>
+                    <p:inputText title="#{msgs.phone_no}" disabled="#{!player.modify}" id="pPhone" value="#{player.phone_no}"/>
+                </p:column>
+                
+                <p:column>
+                    <f:facet name="header"><h:outputText value="#{msgs.league_no}"/></f:facet>
+                    <p:inputText title="#{msgs.league_no}" disabled="#{!player.modify}" id="pLeague" value="#{player.league_no}"/>
+                </p:column>
+                
+                <p:column style="width: auto"> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.update}" /></f:facet>                
+                    <h:selectBooleanCheckbox title="#{msgs.update}" onclick="submit()" value="#{player.modify}">
+                    </h:selectBooleanCheckbox >
+                </p:column> 
+                
+        </p:dataTable>
+                    
+            <h:commandButton title="#{msgs.newButton}" value="#{msgs.newButton}" action="#{playerBean.create}" style="width: auto; height: auto"/>&nbsp;
+            <h:commandButton title="#{msgs.save}" value="#{msgs.save}" action="#{playerBean.saveChanges}" style="width: auto; height:auto"/>&nbsp;
+            <f:facet name="header"> <h:outputText value="#{msgs.delete}" /></f:facet>
+                    <p:commandButton  title="#{msgs.delbutton}"
+                                      value="#{msgs.delbutton}" styleClass="ui-button-raised ui-button-danger" 
+                                      icon="pi pi-trash" 
+                                      onclick="PF('asdv-dlg-delete').show();"
+                                      >
+                    </p:commandButton  >
+                    <p:dialog header="#{msgs.delbutton}" 
+                              widgetVar="asdv-dlg-delete" modal="true">
+                        <h:outputText value="#{msgs.you_sure}"/>
+                        <br/>
+                        <br/>
+                        <p:commandButton value="OK" icon="pi pi-check" 
+                                         update="@form:globalgrowl"
+                                         onclick="PF('dlg').hide();" 
+                                         action="#{playerBean.deletePlayer()}">
+                        </p:commandButton >
+                        <span>&nbsp;&nbsp;&nbsp;</span>
+                        <p:commandButton value="#{msgs.cancel}"  
+                                         styleClass="ui-button-raised ui-button-warning" 
+                                         update="@none"
+                                         partialSubmit = "true"
+                                         onclick="PF('dlg').hide();"/>
+                    </p:dialog>  
+                    <br/><br/>
+                    <h:commandButton title="#{msgs.titleMatch}" value="#{msgs.titleMatch}" action="matches.xhtml" style="width:auto"/>&nbsp;
+                    <h:commandButton title="#{msgs.titlePen}" value="#{msgs.titlePen}" action="penalties.xhtml" style="width:auto"/>&nbsp;
+                    <h:commandButton title="#{msgs.titleCom}" value="#{msgs.titleCom}" action="committee.xhtml" style="width:auto"/>&nbsp;
+                    <h:commandButton title="#{msgs.titleTeam}" value="#{msgs.titleTeam}" action="teams.xhtml" style="width:auto"/>&nbsp;
+        </h:form>
+    </h:body>
+</html>
