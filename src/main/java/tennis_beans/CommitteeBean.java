@@ -72,8 +72,6 @@ public class CommitteeBean implements Serializable {
     }
     
     public void saveChanges() {
-        //>find if supplier has been modified  
-        // and update the modified supplier
         if (committee == null) {
             return;
         }
@@ -89,9 +87,6 @@ public class CommitteeBean implements Serializable {
                     {
                         System.out.println("Inserting " + c.toString());
                         rowsUpdated = this.dmc.insert(c);
-                        
-                        
-                        
                     }
                         rowsUpdated = this.dmc.update(c);
                     if (rowsUpdated > 0) {
