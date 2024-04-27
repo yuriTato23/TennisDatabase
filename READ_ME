@@ -1,0 +1,5 @@
+The initial login window presented requires a random 8 character long username, as well as the password. However the password must contain a '.' or '&' symbol.
+The way the database is accessed is by using an SQL connector with my own username and password. 
+Change those to the values of your database URLs and you should be able to connect.
+The SQL database file is included and can be copied and pasted to create your own identical database.
+Possible improvements: partial rendering
