@@ -71,8 +71,6 @@ public class PlayerBean implements Serializable {
     }
     
     public void saveChanges() {
-        //>find if supplier has been modified  
-        // and update the modified supplier
         if (players == null) {
             return;
         }
