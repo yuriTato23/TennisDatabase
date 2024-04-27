@@ -28,8 +28,7 @@ public class PenaltiesBeans implements Serializable {
 
    List<Penalty> penalties;
    Date payment_date;
-   
-   
+
    @Inject
    TennisDBase<Penalty> dmp;
    @PostConstruct
@@ -58,8 +57,7 @@ public class PenaltiesBeans implements Serializable {
     public void setPenalties(List<Penalty> penalties) {
         this.penalties = penalties;
     }
-    
-    
+   
     public void create() {
 
         try
@@ -76,8 +74,6 @@ public class PenaltiesBeans implements Serializable {
     }
     
     public void saveChanges() {
-        //>find if supplier has been modified  
-        // and update the modified supplier
         if (penalties == null) {
             return;
         }
